@@ -51,7 +51,7 @@ La to-do list est entièrement fonctionnelle (ajouter, supprimer, modifier, marq
 
 ## Déploiement
 
-L'intégration est visible sur : [visible](lien).
+L'intégration est visible : [ici](https://nino-rameau.github.io/cours-javascript/index.html).
 
 ## Aperçu
 ![Aperçu de la page d'accueil](./images/accueil.webp)
