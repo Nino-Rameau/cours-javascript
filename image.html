@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Editor</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="index.js" defer></script>
+        <link rel="icon" href="./images/favicon.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+        <style>
+            :root {
+                --brightness: 100%;
+                --contrast: 100%;
+                --radius: 0px;
+                --background:#667eea;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background: var(--background);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                max-width: 900px;
+                width: 80%;
+            }
+
+            h1 {
+                color: #333;
+                margin-bottom: 30px;
+                font-size: 32px;
+                font-family: "Orbitron", sans-serif;
+                font-weight: 500;
+                text-align: center;
+            }
+
+            .editor {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                align-items: start;
+            }
+
+            @media screen and (max-width: 600px) {
+                .editor {
+                    grid-template-columns: 1fr;
+                }
+                
+            }
+
+            .preview {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 32px;
+                z-index: 2;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                filter: brightness(var(--brightness)) contrast(var(--contrast));
+                border-radius: var(--radius);
+                transition: all 0.1s ease;
+            }
+
+            .controls {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .control-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            label {
+                color: #555;
+                font-weight: 600;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            input[type="range"] {
+                width: 100%;
+                height: 6px;
+                border-radius: 5px;
+                background: #e0e0e0;
+                outline: none;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #667eea;
+                cursor: pointer;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #667eea;
+                cursor: pointer;
+                border: none;
+            }
+        </style>
+    </head>
+    <body class="flex flex-col min-h-screen">
+        <header class="bg-[#28337E] text-white shadow-md !p-4 !mb-8 w-full">
+            <div class="mx-auto flex md:flex-row justify-center items-center w-full">
+
+                <button id="burgerBtn" class="md:hidden flex flex-col gap-1">
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+
+                <nav id="menu" 
+                    class="hidden flex bg-[#28337E]
+                        flex-col gap-4 !py-4 top-10 right-0 absolute w-full text-center z-10
+                        md:flex-row md:!space-x-16 md:block md:w-auto md:relative md:text-xl md:top-0">
+                    <a href="index.html" class="hover:underline">Accueil</a>
+                    <a href="musique.html" class="hover:underline">Musique</a>
+                    <a href="image.html" class="underline">Image</a>
+                    <a href="todo.html" class="hover:underline">to-do list</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="flex flex-col items-center flex-grow">
+            <div class="container">
+                <h1>Image Editor</h1>
+
+                <div class="editor">
+                    <div class="preview">
+                        <img
+                            id="imagePreview"
+                            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600"
+                            alt="Mountain landscape"
+                            data-default="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600"
+                        />
+
+                        <input type="file" id="imageUpload" accept="image/*"/>
+                    </div>
+
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="brightness">Brightness</label>
+                            <input
+                                type="range"
+                                name="brightness"
+                                min="0"
+                                max="200"
+                                value="100"
+                                data-sizing="%"
+                                data-default="100"
+                            />
+                        </div>
+
+                        <div class="control-group">
+                            <label for="contrast">Contrast</label>
+                            <input
+                                type="range"
+                                name="contrast"
+                                min="0"
+                                max="200"
+                                value="100"
+                                data-sizing="%"
+                                data-default="100"
+                            />
+                        </div>
+
+                        <div class="control-group">
+                            <label for="radius">Border Radius</label>
+                            <input
+                                type="range"
+                                name="radius"
+                                min="0"
+                                max="50"
+                                value="0"
+                                data-sizing="px"
+                                data-default="0"
+                            />
+                        </div>
+                        <div>
+                            <label for="background">Background</label>
+                            <input
+                                type="color"
+                                name="background"
+                                value="#667eea"
+                                data-sizing=""
+                                id="background"
+                                data-default="#667eea"
+                            />
+                        </div>
+                        <button id="reset">Réinitialiser</button>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="flex flex-col md:flex-row justify-evenly items-center !p-4 bg-[#28337E] text-white mt-20 w-full">
+            <div class="flex items-center gap-1">
+                <p>Projet réalisé par</p>
+                <a href="https://nino-rameau.fr" class="underline">Nino Rameau</a>
+            </div>
+            <p>Copyright © 2025</p>
+        </footer>
+
+        <script>
+
+            function setInputValue(input, value) {
+                var sizing = input.dataset.sizing || "";
+
+                document.documentElement.style.setProperty (
+                    `--${input.name}`,
+                    value + sizing
+                );
+            };
+
+            var inputs = document.querySelectorAll("input");
+            var button = document.getElementById("reset");
+            const imageUpload = document.getElementById("imageUpload");
+            const imagePreview = document.getElementById("imagePreview");
+
+            inputs.forEach(function (input) {
+                input.addEventListener("change", function(e) {
+                    setInputValue(input, e.target.value);
+                });
+            });
+
+            button.addEventListener("click", function() {
+                inputs.forEach(function(input) {
+                    input.value = input.dataset.default;
+
+                    setInputValue(input, input.dataset.default);
+                })
+            })
+
+
+            imageUpload.addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const newImageUrl = URL.createObjectURL(file);
+                    imagePreview.src = newImageUrl;
+                }
+            });
+        </script>
+    </body>
+</html>

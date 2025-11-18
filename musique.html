@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ma bibliothèque</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="index.js" defer></script>
+        <link rel="icon" href="./images/favicon.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+                background-image: radial-gradient(circle at 71% 29%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 32%,transparent 32%, transparent 100%),radial-gradient(circle at 100% 82%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 26%,transparent 26%, transparent 100%),radial-gradient(circle at 30% 35%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 55%,transparent 55%, transparent 100%),radial-gradient(circle at 71% 54%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 13%,transparent 13%, transparent 100%),radial-gradient(circle at 17% 19%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 83%,transparent 83%, transparent 100%),radial-gradient(circle at 28% 30%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 39%,transparent 39%, transparent 100%),radial-gradient(circle at 56% 19%, rgba(0,0,0, 0.03) 0%, rgba(0,0,0, 0.03) 33%,transparent 33%, transparent 100%),linear-gradient(90deg, rgb(232,229,229),rgb(232,229,229));
+            }
+
+            .dark {
+                background-image: radial-gradient(circle at 71% 29%, rgba(250, 250, 250,0.03) 0%, rgba(250, 250, 250,0.03) 32%,transparent 32%, transparent 100%),radial-gradient(circle at 100% 82%, rgba(82, 82, 82,0.03) 0%, rgba(82, 82, 82,0.03) 26%,transparent 26%, transparent 100%),radial-gradient(circle at 30% 35%, rgba(78, 78, 78,0.03) 0%, rgba(78, 78, 78,0.03) 55%,transparent 55%, transparent 100%),radial-gradient(circle at 71% 54%, rgba(52, 52, 52,0.03) 0%, rgba(52, 52, 52,0.03) 13%,transparent 13%, transparent 100%),radial-gradient(circle at 17% 19%, rgba(255,255,255, 0.03) 0%, rgba(255,255,255, 0.03) 83%,transparent 83%, transparent 100%),radial-gradient(circle at 28% 30%, rgba(219, 219, 219,0.03) 0%, rgba(219, 219, 219,0.03) 39%,transparent 39%, transparent 100%),radial-gradient(circle at 56% 19%, rgba(155, 155, 155,0.03) 0%, rgba(155, 155, 155,0.03) 33%,transparent 33%, transparent 100%),linear-gradient(90deg, rgb(12,9,9),rgb(12,9,9));
+                color: #f0f0f0;
+            }
+
+            h1 {
+                margin-bottom: 30px;
+                font-family: "Orbitron", sans-serif;
+                font-weight: 500;
+                font-size: 32px;
+            }
+
+            .volume-control {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 30px;
+                padding: 15px 30px;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .volume-control label {
+                color: #333;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            #volume-slider {
+                width: 200px;
+                height: 6px;
+                -webkit-appearance: none;
+                appearance: none;
+                background: #ddd;
+                border-radius: 5px;
+                outline: none;
+            }
+
+            #volume-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 18px;
+                height: 18px;
+                background: #333;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            #volume-slider::-moz-range-thumb {
+                width: 18px;
+                height: 18px;
+                background: #333;
+                border-radius: 50%;
+                cursor: pointer;
+                border: none;
+            }
+
+            #volume-value {
+                color: #333;
+                font-weight: bold;
+                font-size: 14px;
+                min-width: 45px;
+            }
+
+            .soundboard {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                padding: 20px;
+            }
+            @media screen and (max-width: 600px) {
+                .soundboard {
+                    flex-direction: column;
+                }
+                
+            }
+
+            .sound-card {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                cursor: pointer;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .sound-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .play-button {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 60px;
+                height: 60px;
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .sound-card:hover .play-button,
+            .sound-card.playing .play-button {
+                opacity: 1;
+            }
+
+            .play-button::after {
+                content: "";
+                width: 0;
+                height: 0;
+                border-left: 20px solid #333;
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                margin-left: 5px;
+            }
+
+            .sound-card.playing .play-button::after {
+                content: "";
+                width: 20px;
+                height: 24px;
+                border-left: 7px solid #333;
+                border-right: 7px solid #333;
+                border-top: 0;
+                border-bottom: 0;
+                margin-left: 0;
+                box-sizing: border-box;
+            }
+            .btn-mode {
+                padding: 10px 20px;
+                margin-bottom: 20px;
+                cursor: pointer;
+                border: black 1px solid;
+                border-radius: 10px;
+            }
+            
+        </style>
+    </head>
+    <body class="flex flex-col min-h-screen">
+        <header class="bg-[#28337E] text-white shadow-md p-4 mb-8 w-full">
+            <div class="container mx-auto flex md:flex-row justify-center items-center">
+
+                <button id="burgerBtn" class="md:hidden flex flex-col gap-1">
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+
+                <nav id="menu" 
+                    class="hidden flex bg-[#28337E]
+                        flex-col gap-4 py-4 top-10 right-0 absolute w-full text-center
+                        md:flex-row md:space-x-16 md:block md:w-auto md:relative md:text-xl md:top-0">
+                    <a href="index.html" class="hover:underline">Accueil</a>
+                    <a href="musique.html" class="underline">Musique</a>
+                    <a href="image.html" class="hover:underline">Image</a>
+                    <a href="todo.html" class="hover:underline">to-do list</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="flex flex-col items-center flex-grow">
+        
+        <h1>Ma bibliothèque</h1>
+
+        <div>
+            <button id="light-Dark" class="btn-mode">Mode Clair/Sombre</button>
+        </div>
+
+        <div class="volume-control">
+            <label for="volume-slider">Volume:</label>
+            <input
+                type="range"
+                id="volume-slider"
+                min="0"
+                max="100"
+                value="100"
+            />
+            <span id="volume-value">100%</span>
+        </div>
+
+        <div class="soundboard">
+            <div class="sound-card" data-sound="1">
+                <img src="images/replic44.jpg" alt="Sound 1" />
+                <div class="play-button"></div>
+            </div>
+            <div class="sound-card" data-sound="2">
+                <img src="images/99xp.jpg" alt="Sound 2" />
+                <div class="play-button"></div>
+            </div>
+            <div class="sound-card" data-sound="3">
+                <img src="images/dmvp.jpg" alt="Sound 3" />
+                <div class="play-button"></div>
+            </div>
+        </div>
+
+        <audio data-sound="1" src="./songs/akamargi.mp3"></audio>
+        <audio data-sound="2" src="./songs/4bulldog.mp3"></audio>
+        <audio data-sound="3" src="./songs/sheriff.mp3"></audio>
+
+        </main>
+        
+        <footer class="flex flex-col md:flex-row justify-evenly items-center p-4 bg-[#28337E] text-white mt-20 w-full">
+            <div class="flex items-center gap-1">
+                <p>Projet réalisé par</p>
+                <a href="https://nino-rameau.fr" class="underline">Nino Rameau</a>
+            </div>
+            <p>Copyright © 2025</p>
+        </footer>
+        <script>
+            function playSound(e) {
+                const soundCard = e.target.closest(".sound-card");
+                const soundNumber = soundCard.dataset.sound;
+                const audio = document.querySelector(
+                    `audio[data-sound="${soundNumber}"]`,
+                );
+                //const active = document.addEventListener("Digit1");
+
+                // If this audio is currently playing, pause it
+                if (!audio.paused) {
+                    audio.pause();
+                    soundCard.classList.remove("playing");
+                    return;
+                }
+
+                // Stop all other audio and remove playing state
+                const allAudio = document.querySelectorAll("audio");
+                const allCards = document.querySelectorAll(".sound-card");
+                allAudio.forEach((audioElement) => {
+                    audioElement.pause();
+                    audioElement.currentTime = 0;
+                });
+                allCards.forEach((card) => card.classList.remove("playing"));
+
+                // Play the selected audio and add playing state
+                audio.play();
+                soundCard.classList.add("playing");
+            }
+
+            mode = document.getElementById("light-Dark");
+            mode.addEventListener("click", function () {
+                document.body.classList.toggle("dark");
+            });
+
+            const soundCards = document.querySelectorAll(".sound-card");
+            soundCards.forEach((card) =>
+                card.addEventListener("click", playSound),
+            );
+
+            var audioSlider = document.getElementById("volume-slider");
+            var volume = document.getElementById("volume-value");
+            var allAudio = document.querySelectorAll("audio");
+
+            audioSlider.addEventListener("input", function (event) {
+                const value = event.target.value / 100;
+
+                allAudio.forEach(function (audio) {
+                    audio.volume = value;
+                });
+
+                volume.innerText = event.target.value + "%";
+            });
+            
+            document.addEventListener("keydown", function (event) {
+                const code = event.code;
+
+                if (code === "ArrowUp") {
+                    let newValue = Math.min(100, Number(audioSlider.value) + 5);
+                    audioSlider.value = newValue;
+
+                    const volumeValue = newValue / 100;
+                    allAudio.forEach(a => a.volume = volumeValue);
+                    volume.innerText = newValue + "%";
+                    return;
+                }
+
+                if (code === "ArrowDown") {
+                    let newValue = Math.max(0, Number(audioSlider.value) - 5);
+                    audioSlider.value = newValue;
+
+                    const volumeValue = newValue / 100;
+                    allAudio.forEach(a => a.volume = volumeValue);
+                    volume.innerText = newValue + "%";
+                    return;
+                }
+
+                if (code === "Space") {
+                    const currentAudio = [...document.querySelectorAll("audio")].find(a => !a.paused);
+
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        const card = document.querySelector(`.sound-card[data-sound="${currentAudio.dataset.sound}"]`);
+                        card.classList.remove("playing");
+                        return;
+                    }
+
+                    const lastPlayed = [...document.querySelectorAll("audio")].find(a => a.currentTime > 0);
+
+                    if (lastPlayed) {
+                        lastPlayed.play();
+                        const lastCard = document.querySelector(`.sound-card[data-sound="${lastPlayed.dataset.sound}"]`);
+                        lastCard.classList.add("playing");
+                    }
+
+                    return;
+                }
+
+                if (code.startsWith("Digit")) {
+                    const soundNumber = code.replace("Digit", "");
+                    const card = document.querySelector(`.sound-card[data-sound="${soundNumber}"]`);
+                    const audio = document.querySelector(`audio[data-sound="${soundNumber}"]`);
+
+                    if (!audio) return;
+
+                    if (!audio.paused) {
+                        audio.pause();
+                        card.classList.remove("playing");
+                        return;
+                    }
+
+                    document.querySelectorAll("audio").forEach(a => {
+                        a.pause();
+                        a.currentTime = 0;
+                    });
+                    document.querySelectorAll(".sound-card").forEach(c => c.classList.remove("playing"));
+
+                    audio.play();
+                    card.classList.add("playing");
+                }
+            });
+        </script>
+    </body>
+</html>

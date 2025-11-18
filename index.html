@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accueil</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="index.js" defer></script>
+        <link rel="icon" href="./images/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+        <style>
+            .font-orbitron {
+                font-family: "Orbitron", sans-serif;
+                font-weight: 500;
+            }
+            .fond {
+                background-image: radial-gradient(circle at 71% 29%, rgba(250, 250, 250,0.03) 0%, rgba(250, 250, 250,0.03) 32%,transparent 32%, transparent 100%),radial-gradient(circle at 100% 82%, rgba(82, 82, 82,0.03) 0%, rgba(82, 82, 82,0.03) 26%,transparent 26%, transparent 100%),radial-gradient(circle at 30% 35%, rgba(78, 78, 78,0.03) 0%, rgba(78, 78, 78,0.03) 55%,transparent 55%, transparent 100%),radial-gradient(circle at 71% 54%, rgba(52, 52, 52,0.03) 0%, rgba(52, 52, 52,0.03) 13%,transparent 13%, transparent 100%),radial-gradient(circle at 17% 19%, rgba(255,255,255, 0.03) 0%, rgba(255,255,255, 0.03) 83%,transparent 83%, transparent 100%),radial-gradient(circle at 28% 30%, rgba(219, 219, 219,0.03) 0%, rgba(219, 219, 219,0.03) 39%,transparent 39%, transparent 100%),radial-gradient(circle at 56% 19%, rgba(155, 155, 155,0.03) 0%, rgba(155, 155, 155,0.03) 33%,transparent 33%, transparent 100%),linear-gradient(90deg, rgb(12,9,9),rgb(12,9,9));
+            }
+        </style>
+    </head>
+    <body class="flex flex-col min-h-screen fond">
+        <header class="bg-[#28337E] text-white shadow-md p-4 mb-8">
+            <div class="container mx-auto flex md:flex-row justify-center items-center">
+
+                <button id="burgerBtn" class="md:hidden flex flex-col gap-1">
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+
+                <nav id="menu" 
+                    class="hidden flex bg-[#28337E]
+                        flex-col gap-4 py-4 top-10 right-0 absolute w-full text-center
+                        md:flex-row md:space-x-16 md:block md:w-auto md:relative md:text-xl md:top-0">
+                    <a href="index.html" class="underline">Accueil</a>
+                    <a href="musique.html" class="hover:underline">Musique</a>
+                    <a href="image.html" class="hover:underline">Image</a>
+                    <a href="todo.html" class="hover:underline">to-do list</a>
+                </nav>
+            </div>
+        </header>
+        <main class="flex flex-col items-center flex-grow">
+
+            <h1 class="text-4xl my-20 font-orbitron text-white">Bienvenue sur la page d'accueil : </h1>
+            <div class="flex flex-col md:flex-row gap-16 mt-8 justify-center items-center w-[80%]">
+                <div class="flex flex-col gap-6 bg-[#28337E] p-6 rounded-xl text-white text-center w-[90%] shadow-[0_0_25px_#28337E] transform transition-all duration-300 hover:scale-105">
+                    <h2 class="text-3xl font-orbitron">Musique</h2>
+                    <a class="bg-[#ACDDF6] rounded-lg text-black p-4 md:whitespace-nowrap font-medium transition-transform duration-300 hover:scale-105 hover:bg-[#90C9E8] hover:italic" href="musique.html">
+                        Accéder à la page Musique
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-6 bg-[#28337E] p-6 rounded-xl text-white text-center w-[90%] shadow-[0_0_25px_#28337E] transform transition-all duration-300 hover:scale-105">
+                    <h2 class="text-3xl font-orbitron">Image</h2>
+                    <a class="bg-[#ACDDF6] rounded-lg text-black p-4 md:whitespace-nowrap font-medium transition-transform duration-300 hover:scale-105 hover:bg-[#90C9E8] hover:italic" href="image.html">
+                        Accéder à la page Image
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-6 bg-[#28337E] p-6 rounded-xl text-white text-center w-[90%] shadow-[0_0_25px_#28337E] transform transition-all duration-300 hover:scale-105">
+                    <h2 class="text-3xl font-orbitron">To-do list</h2>
+                    <a class="bg-[#ACDDF6] rounded-lg text-black p-4 md:whitespace-nowrap font-medium transition-transform duration-300 hover:scale-105 hover:bg-[#90C9E8] hover:italic" href="todo.html">
+                        Accéder à la page To-do list
+                    </a>
+                </div>
+            </div>
+
+            
+        </main>
+        <footer class="flex flex-col md:flex-row justify-evenly items-center p-4 bg-[#28337E] text-white mt-20">
+            <div class="flex items-center gap-1">
+                <p>Projet réalisé par</p>
+                <a href="https://nino-rameau.fr" class="underline">Nino Rameau</a>
+            </div>
+            <p>Copyright © 2025</p>
+        </footer>
+    </body>
+</html>
