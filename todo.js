@@ -19,7 +19,7 @@ if (localStorage.getItem("todo")) {
 ///////////////
 
 function getFlexDirectionClass() {
-    return window.innerWidth >= 1280 ? "flex-row" : "flex-col";
+    return window.innerWidth >= 768 ? "flex-row" : "flex-col";
 }
 
 function ajouterTache() {
@@ -141,7 +141,7 @@ function afficherTaches() {
 
             div.innerHTML = `
                 <p class="max-w-2xl text-black">${t.texte}</p>
-                <div class="flex flex-col gap-2 justify-center items-center w-[15%]">
+                <div class="flex flex-col gap-2 justify-center items-center md:w-[25%]">
                     <button class="bg-[#28337E] rounded p-1 text-white w-full" data-action="modifier">Modifier</button>
                     <button class="bg-green-500 rounded p-1 text-white w-full" data-action="archiver">
                         ${t.etat ? "Archiver" : "Désarchiver"}

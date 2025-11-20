@@ -40,10 +40,12 @@
             .container {
                 background: white;
                 border-radius: 20px;
-                padding: 40px;
+                padding: 5%;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                 max-width: 900px;
-                width: 80%;
+                width: 85%;
+                height: 100%;
+                min-height: min-content;
             }
 
             h1 {
@@ -57,28 +59,30 @@
 
             .editor {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 30px;
                 align-items: start;
-                height: 350px;
+                width: 100%;
             }
-
-            @media screen and (max-width: 600px) {
+            
+            @media screen and (min-width: 600px) {
                 .editor {
-                    grid-template-columns: 1fr;
+                    grid-template-columns: 1fr 1fr;
+                    height: 350px;
                 }
                 
             }
-
+            
             .preview {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
-                height: 100%;
                 z-index: 2;
+                height: 100%;
+                max-width: 75%;
             }
-
+            
             img {
                 width: 100%;
                 height: auto;
@@ -86,12 +90,29 @@
                 border-radius: var(--radius);
                 transition: all 0.1s ease;
             }
-
+            
             .controls {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                height: 100%;
+                max-width: 75%;
+            }
+            @media screen and (max-width: 600px) {
+                .preview {
+                    gap: 30px;
+                }
+                .controls {
+                    gap: 30px;
+                }
+            }
+
+            @media screen and (min-width: 768px) {
+                .controls {
+                    height: 100%;
+                }
+                .preview{
+                    height: 100%;
+                }
             }
 
             .control-group {
@@ -156,6 +177,7 @@
                 cursor: pointer;
                 text-align: center;
                 display: inline-block;
+                max-width: 75%;
             }
 
             .btn-img:hover {
