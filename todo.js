@@ -100,7 +100,7 @@ function modifier(id) {
     btnModifier.setAttribute("data-action", "modifier");    
     
     input.addEventListener("keydown", e => {
-        if (e.code === "Enter") sauvegarder();
+        if (e.code === "Enter" || e.code === "NumpadEnter") sauvegarder();
     });
     
     input.addEventListener("blur", () => {
@@ -194,7 +194,7 @@ document.querySelectorAll("#filtres > button").forEach(btn => {
 
 // touche Entrée
 document.addEventListener("keydown", function (event) {
-    if (event.code === "Enter" && event.target.id === "tacheAjouter") {
+    if ((event.code === "Enter" || event.code === "NumpadEnter") && event.target.id === "tacheAjouter") {
         ajouterTache();
     }
 });

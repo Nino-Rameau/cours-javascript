@@ -60,6 +60,7 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 30px;
                 align-items: start;
+                height: 350px;
             }
 
             @media screen and (max-width: 600px) {
@@ -72,9 +73,9 @@
             .preview {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                gap: 32px;
+                height: 100%;
                 z-index: 2;
             }
 
@@ -89,7 +90,8 @@
             .controls {
                 display: flex;
                 flex-direction: column;
-                gap: 25px;
+                justify-content: space-between;
+                height: 100%;
             }
 
             .control-group {
@@ -145,10 +147,25 @@
             .btn-reset:hover {
                 background: #1e276e;
             }
+
+            .btn-img {
+                padding: 10px 20px;
+                background: #28337E;
+                color: white;
+                border-radius: 10px;
+                cursor: pointer;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .btn-img:hover {
+                background: #1e276e;
+            }
+
         </style>
     </head>
     <body class="flex flex-col min-h-screen">
-        <header class="bg-[#28337E] text-white shadow-md !p-4 !mb-8 w-full">
+        <header class="bg-[#28337E] text-white shadow-md !p-4 !mb-20 w-full">
             <div class="mx-auto flex md:flex-row justify-center items-center w-full">
 
                 <button id="burgerBtn" class="md:hidden flex flex-col gap-1">
@@ -164,7 +181,7 @@
                     <a href="index.html" class="hover:underline">Accueil</a>
                     <a href="musique.html" class="hover:underline">Musique</a>
                     <a href="image.html" class="underline">Image</a>
-                    <a href="todo.html" class="hover:underline">to-do list</a>
+                    <a href="todo.html" class="hover:underline">To-do list</a>
                 </nav>
             </div>
         </header>
@@ -182,7 +199,7 @@
                             data-default="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600"
                         />
 
-                        <input type="file" id="imageUpload" accept="image/*"/>
+                        <input type="file" id="imageUpload" accept="image/*" class="btn-img"/>
                     </div>
 
                     <div class="controls">

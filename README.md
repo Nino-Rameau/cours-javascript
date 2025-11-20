@@ -5,7 +5,7 @@ Ce projet est composé en plusieurs parties :
 - une application de gestion d'images (réalisée en cours)
 - une application de to-do list (réalisée en projet)
 
-La to-do list est entièrement fonctionnelle (ajouter, supprimer, modifier, marquer comme complétée, compteur de tâches) en utilisant le local storage. L'application est stylisée avec Tailwind CSS et est entièrement responsive.
+La to-do list est entièrement fonctionnelle (ajouter, supprimer, modifier, marquer comme archivée, compteur de tâches) en utilisant le local storage. L'application est stylisée avec Tailwind CSS et est entièrement responsive.
 
 ## Sommaire
 
